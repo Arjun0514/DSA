@@ -142,6 +142,32 @@ Node* deleteKthOtherAppro(Node* head,int k)
     mover=nullptr;
     return head;
 }
+Node* deleteGivenNodewithData(Node* head, int data){
+    if(head->data==data){
+        return deleteHead(head);
+    }
+    Node* mover=head;
+    while(mover!=nullptr){
+        if(mover->data==data){
+            break;
+        }
+        mover=mover->next;
+    }
+    if(mover==nullptr){
+        cout<<"Node with given data not exists"<<endl;
+        return head;
+    }
+    mover->back->next=mover->next;
+    //If its last node, then it won't have next
+    if(mover->next!=nullptr){
+        mover->next->back=mover->back;
+    }
+    mover->next=nullptr;
+    mover->back=nullptr;
+    delete mover;
+    mover=nullptr;
+    return head;
+}
 int main() {
     vector<int> vec= {11,22,33,44,55};
     Node* head= convertArrayToDLL(vec);
@@ -157,6 +183,9 @@ int main() {
     // displayDLL(head);
 
     head=deleteKthOtherAppro(head,3);
+    displayDLL(head);
+    
+    head=deleteGivenNodewithData(head,323);
     displayDLL(head);
     return 0;
 }

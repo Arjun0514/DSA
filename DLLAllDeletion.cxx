@@ -101,8 +101,49 @@ Node* deleteKth(Node* head, int k){
     mover=nullptr;
     return head;
 }
+
+//here used while loop, time complexity for delete end is 2n
+Node* deleteKthOtherAppro(Node* head,int k)
+{
+    if(head==nullptr){
+        return nullptr;
+    }
+    Node* mover = head;
+    int cnt=1;
+    while(mover!=nullptr){
+        if(cnt==k)
+        {
+            break;
+        }
+        cnt++;
+        mover=mover->next;
+    }
+    if(mover==nullptr){
+        cout<<"invalid position"<<endl;
+        return head;
+    }
+    Node* prev=mover->back;
+    Node* front=mover->next;
+    if(prev==nullptr && front==nullptr){
+        return nullptr;
+    }
+    if(prev==nullptr){
+        return deleteHead(head);
+    }
+    if(front==nullptr){
+        return deleteTail(head);
+    }
+    prev->next=front;
+    front->back=prev;
+    
+    mover->next=nullptr;
+    mover->back=nullptr;
+    delete mover;
+    mover=nullptr;
+    return head;
+}
 int main() {
-    vector<int> vec= {11};
+    vector<int> vec= {11,22,33,44,55};
     Node* head= convertArrayToDLL(vec);
     displayDLL(head);
     
@@ -112,7 +153,10 @@ int main() {
     // head= deleteTail(head);
     // displayDLL(head);
     
-    head=deleteKth(head,1);
+    // head=deleteKth(head,1);
+    // displayDLL(head);
+
+    head=deleteKthOtherAppro(head,3);
     displayDLL(head);
     return 0;
 }

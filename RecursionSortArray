@@ -1,0 +1,38 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<vector>
+using namespace std;
+
+void printArray(vector<int>& nums){
+    for(int i=0;i<nums.size();i++){
+        cout<<nums[i]<<" ";
+    }
+}
+void insertEle(vector<int>& nums, int ele){
+        if(nums.size()==0 || nums.back()<=ele){
+            nums.push_back(ele);
+            return;
+        }
+        int val=nums[nums.size()-1];
+        nums.pop_back();
+        insertEle(nums,ele);
+        nums.push_back(val);
+    }
+    
+void sortArray(vector<int>& num){
+        if(num.size()==1){
+            return;
+        }
+        int element= num.back();
+        num.pop_back();
+        sortArray(num);
+        insertEle(num,element);
+    }
+
+    
+int main() {
+    vector<int> nums= {33,22,55,44,11,77,66};
+    sortArray(nums);
+    printArray(nums);
+    return 0;
+}

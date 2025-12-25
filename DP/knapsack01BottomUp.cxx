@@ -11,13 +11,12 @@ int knapsack(vector<int> &wt, vector<int> &val, int cap){
        for(int j=1; j<=cap; j++){
           int currentWeight= wt[i-1];
           int currentValue= val[i-1];
-
+          int pick=0;
           if(currentWeight<=j){
-             dp[i][j] = currentValue+ dp[i-1][j-currentWeight];
+             pick = currentValue+ dp[i-1][j-currentWeight];
           }
-          else{
-             dp[i][j] = dp[i-1][j];
-          }
+          int notPick = dp[i-1][j];
+          dp[i][j]=max(pick,notPick);
        }
     } 
     return dp[n][cap];

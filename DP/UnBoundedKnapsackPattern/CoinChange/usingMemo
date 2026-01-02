@@ -1,0 +1,31 @@
+class Solution {
+  public:
+  
+    int countRec(vector<int> &coins,int sum,int n, vector<vector<int>> &memo){
+        if(sum==0){
+            return 1;
+        }
+        if(n==0){
+            return 0;
+        }
+        
+        if(memo[n][sum]!=-1){
+            return memo[n][sum];
+        }
+        int pick=0;
+        if(coins[n-1]<=sum)
+           pick=countRec(coins,sum-coins[n-1],n,memo);
+        
+        int notPick=countRec(coins,sum,n-1,memo);
+        
+        return memo[n][sum]=(pick+notPick);
+           
+        
+    }
+    int count(vector<int>& coins, int sum) {
+        // code here.
+        int n =coins.size();
+        vector<vector<int>> memo(coins.size()+1,vector<int>(sum+1,-1));
+        return countRec(coins,sum,n,memo);
+    }
+};

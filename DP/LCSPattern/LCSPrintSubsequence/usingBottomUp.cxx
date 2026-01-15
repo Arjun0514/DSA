@@ -32,7 +32,7 @@ string printSubSequence(string &s1, string &s2,int m, int n ){
   int index=dp[m][n];
   char ch[index+1];
   string str(index,'z');
-  while(m>0 || n>0){
+  while(m>0 && n>0){
       if(s1[m-1]==s2[n-1]){
           str[index-1]=s1[m-1];
           index--;

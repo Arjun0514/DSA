@@ -1,0 +1,5 @@
+1. find the palindrome from given string
+  -> LCS(str, reverse(str))
+
+2. find minimum number of deletion required to create palindrome from given string
+  -> length of string - LCS (str,reverse(str))

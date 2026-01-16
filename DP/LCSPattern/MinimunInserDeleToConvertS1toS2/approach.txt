@@ -1,0 +1,2 @@
+Total operations= (length of s1 - LCS)+(Length of s2 - LCS)
+                =s1+s2-2LCS
